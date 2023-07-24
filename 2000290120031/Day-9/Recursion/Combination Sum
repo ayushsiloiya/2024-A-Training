@@ -1,0 +1,35 @@
+class Solution {
+public:
+  vector<vector<int>>ans;
+  void fun(vector<int>& c, int tar, vector<int>&temp ,int &sum,int i )
+  {
+      
+        if(sum==tar)
+        {
+            ans.push_back(temp);
+            return;
+        }
+        if(i==c.size())
+      {
+          return;
+      }
+        if(sum>tar)
+        {
+            return;
+        }
+
+        fun(c,tar,temp,sum,i+1);
+        //include
+        sum+=c[i];
+        temp.push_back(c[i]);
+        fun(c,tar,temp,sum,i);
+        sum-=c[i];
+        temp.pop_back();
+  }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<int>temp;
+        int s=0;
+        fun(candidates,target,temp,s,0);
+        return ans;
+    }
+};
