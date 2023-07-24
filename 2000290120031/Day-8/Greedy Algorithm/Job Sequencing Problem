@@ -1,0 +1,27 @@
+  vector<int> JobScheduling(Job arr[], int n) 
+    { 
+        // your code here
+        if(n <= 0)
+            return {0, 0};
+        const auto myCmp = [&](const Job &a, const Job &b) -> bool {
+            return a.profit > b.profit;
+        };
+
+        vector<bool> v(n, false);
+        int cnt = 0;
+        int maxProfit = 0;
+        sort(arr, arr+n, myCmp);
+
+        for(int i=0; i<n; ++i) {
+            for(int j=arr[i].dead-1; j>=0; --j) {
+                if(!v[j]) {
+                    v[j] = true;
+                    maxProfit += arr[i].profit;
+                    ++cnt;
+                    break;
+                }
+            }
+        }
+        
+        return {cnt, maxProfit};
+    } 
