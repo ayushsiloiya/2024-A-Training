@@ -1,0 +1,53 @@
+class Solution {
+public:
+   void search(vector<int>&nums,int l,int h,int &ans)
+   {
+       if(l==h)
+       {
+           ans=nums[l];
+           return;
+       }
+       if(l>h)
+       {
+           return;
+       }
+       int mid=(l+h)/2;
+       if(mid%2==0)
+       {
+           if(nums[mid]==nums[mid+1])
+           {
+               search(nums,mid+2,h,ans);
+           }
+           else if(nums[mid]==nums[mid-1])
+           {
+               search(nums,l,mid-2,ans);
+           }
+           else
+           {
+               ans=nums[mid];
+               return;
+           }
+       }
+       else
+       {
+           if(nums[mid]==nums[mid-1])
+           {
+               search(nums,mid+1,h,ans);
+           }
+           else if(nums[mid]==nums[mid+1])
+           {
+               search(nums,l,mid-1,ans);
+           }
+           else
+           {
+               ans=nums[mid];
+               return;
+           }
+       }
+   }
+    int singleNonDuplicate(vector<int>& nums) {
+        int ans;
+        search(nums,0,nums.size()-1,ans);
+        return ans;
+    }
+};
