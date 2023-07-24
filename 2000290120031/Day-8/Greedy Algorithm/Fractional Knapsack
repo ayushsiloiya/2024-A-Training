@@ -1,0 +1,25 @@
+  double fractionalKnapsack(int W, Item arr[], int n)
+    {
+        // Your code here
+        const auto myCmp = [&](const Item &a, const Item &b) -> bool {
+            double aRatio = static_cast<double>(a.value) / static_cast<double>(a.weight);
+            double bRatio = static_cast<double>(b.value) / static_cast<double>(b.weight);
+            return aRatio > bRatio;
+        };
+        
+        double res = 0;
+        sort(arr, arr + n, myCmp);
+        
+        for(int i=0; i<n; ++i) {
+            if(static_cast<double>(arr[i].weight) <= static_cast<double>(W)) {
+                res += static_cast<double>(arr[i].value);
+                W -= static_cast<double>(arr[i].weight);
+            }
+            else {
+                res += (static_cast<double>(arr[i].value)*(static_cast<double>(W)/static_cast<double>(arr[i].weight)));
+                break;
+            }
+        }
+        
+        return res;
+    }
