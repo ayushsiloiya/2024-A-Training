@@ -1,0 +1,39 @@
+class Solution {
+public:
+vector<vector<int>>ans;
+void fun(vector<int>& c, int target,vector<int>&temp , int &sum ,int i)
+{
+
+if(sum==target)
+{
+    ans.push_back(temp);
+    return;
+}
+if(i==c.size())
+{
+    return;
+}
+if(sum>target)
+{
+    return;
+}
+sum+=c[i];
+temp.push_back(c[i]);
+fun(c,target,temp,sum,i+1);
+while(i+1<c.size() && c[i]==c[i+1])
+{
+    i++;
+}
+sum-=c[i];
+temp.pop_back();
+fun(c,target,temp,sum,i+1);
+}
+
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        sort(candidates.begin(),candidates.end());
+        vector<int>temp;
+        int s=0;
+        fun(candidates,target,temp,s,0);
+        return ans;
+    }
+};

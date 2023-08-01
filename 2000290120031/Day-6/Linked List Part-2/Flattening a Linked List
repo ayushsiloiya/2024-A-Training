@@ -1,0 +1,29 @@
+Node* merge(Node* l1, Node* l2){
+        if(l1==NULL) return l2;
+        if(l2==NULL) return l1;
+        Node* tmp=new Node(0);
+        Node* res=tmp;
+        
+        while(l1!=NULL && l2!=NULL){
+            if(l1->data<l2->data){
+                tmp->bottom=l1;
+                tmp=tmp->bottom;
+                l1=l1->bottom;
+            }else{
+                tmp->bottom=l2;
+                tmp=tmp->bottom;
+                l2=l2->bottom;
+            }
+        }
+        if(l1) tmp->bottom=l1;
+        else tmp->bottom=l2;
+        return res->bottom;
+    }
+    
+    Node *flatten(Node *head)
+    {
+       // Your code here
+       if(head==NULL || head->next==NULL) return head;
+       Node* l2=flatten(head->next);
+       return merge(head, l2);
+    }
