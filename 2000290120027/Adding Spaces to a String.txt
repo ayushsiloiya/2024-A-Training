@@ -1,0 +1,22 @@
+class Solution:
+    def addSpaces(self, s: str, spaces: List[int]) -> str:
+        arr=[]
+        n=len(s)
+        spaces.append(n)
+        m=len(spaces)
+        j=0
+
+        for i in range(m):
+            a=spaces[i]
+            temp=s[j:a]
+            j=a
+            temp=temp+" "
+            arr.append(temp)
+
+        s=""
+        for i in arr:
+            s=s+i
+
+        n=len(s)
+        s=s[:n-1]
+        return s

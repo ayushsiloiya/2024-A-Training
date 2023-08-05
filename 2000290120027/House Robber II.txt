@@ -1,0 +1,59 @@
+
+
+class Solution {
+public:
+
+    int solve1(vector<int>&nums,int index,vector<int>&generator){
+
+        if(generator[index]!=-1){
+            return generator[index];
+        }
+        
+
+        if(index==nums.size()-1){
+            return nums[index];
+        }
+        if(index>=nums.size()){
+            return 0;
+        }
+
+        int yes=nums[index]+solve1(nums,index+2,generator);
+        int no=solve1(nums,index+1,generator);
+
+        generator[index]=max(yes,no);
+        
+        return generator[index];
+
+    
+    }
+    
+
+
+
+    int rob(vector<int>& nums) {
+
+        int index=0;
+        int n=nums.size();
+        if(n==1){
+            return nums[0];
+        }
+        vector<int>generator1(nums.size()+1,-1);
+        vector<int>generator2(nums.size()+1,-1);
+        vector<int>left;
+        vector<int>right;
+        for(int i=0;i<n;i++){
+            if(i!=n-1){
+                left.push_back(nums[i]);
+            }
+            if(i!=0){
+                right.push_back(nums[i]);
+            }
+        }
+        
+        int ans1=solve1(left,index,generator1);
+        int ans2=solve1(right,index,generator2);
+
+        return max(ans2,ans1);
+        
+    }
+};

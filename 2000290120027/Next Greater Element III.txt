@@ -1,0 +1,45 @@
+class Solution {
+
+private:
+
+    void solve(string &s,int a,int b,vector<int>&ans,int n){
+
+        if(a==b){
+            int k=stol(s);
+            if(k>n){
+                ans.push_back(k);
+            }
+        }
+        else{
+            for(int i=a;i<=b;i++){
+                swap(s[a],s[i]);
+                solve(s,a+1,b,ans,n);
+                swap(s[a],s[i]);
+            }
+
+        }
+    
+    }
+
+public:
+
+    int nextGreaterElement(int n) {
+
+        string s=to_string(n);
+        int a=0;
+        int b=s.length()-1;
+        vector<int>ans;
+        
+        solve(s,a,b,ans,n);
+
+        sort(ans.begin(),ans.end());
+
+        a=ans.size();
+        if(a==0){
+            return -1;
+        }
+        
+        return ans[0];
+        
+    }
+};

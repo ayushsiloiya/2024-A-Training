@@ -1,0 +1,99 @@
+class Node {
+    int data;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+    Node head;
+
+    public LinkedList() {
+        this.head = null;
+    }
+
+    public void insert(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node currentNode = head;
+            while (currentNode.next != null) {
+                currentNode = currentNode.next;
+            }
+            currentNode.next = newNode;
+        }
+    }
+
+    public void insertAtBeginning(int data) {
+        Node newNode = new Node(data);
+        newNode.next = head;
+        head = newNode;
+    }
+
+    public void insertAtEnd(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node currentNode = head;
+            while (currentNode.next != null) {
+                currentNode = currentNode.next;
+            }
+            currentNode.next = newNode;
+        }
+    }
+
+    public void insertAtPosition(int data, int position) {
+        Node newNode = new Node(data);
+        if (position == 1) {
+            newNode.next = head;
+            head = newNode;
+        } else {
+            Node previousNode = head;
+            int count = 1;
+            while (count < position - 1 && previousNode.next != null) {
+                previousNode = previousNode.next;
+                count++;
+            }
+            if (count == position - 1) {
+                newNode.next = previousNode.next;
+                previousNode.next = newNode;
+            } else {
+                System.out.println("Invalid position!");
+            }
+        }
+    }
+
+    public void display() {
+        Node currentNode = head;
+        while (currentNode != null) {
+            System.out.print(currentNode.data + " ");
+            currentNode = currentNode.next;
+        }
+        System.out.println();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedList linkedList = new LinkedList();
+        linkedList.insert(5);
+        linkedList.insert(10);
+        linkedList.insert(15);
+        linkedList.insert(20);
+        linkedList.display(); // Output: 5 10 15 20
+
+        linkedList.insertAtBeginning(2);
+        linkedList.display(); // Output: 2 5 10 15 20
+
+        linkedList.insertAtEnd(25);
+        linkedList.display(); // Output: 2 5 10 15 20 25
+
+        linkedList.insertAtPosition(12, 3);
+        linkedList.display(); // Output: 2 5 12 10 15 20 25
+    }
+}

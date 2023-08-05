@@ -1,0 +1,42 @@
+class Solution {
+public:
+
+    int solve(vector<int>&arr,int n,vector<int>&matrix){
+
+        if(n==0){
+            return 0;
+        }
+        if(n<0){
+                 
+            //minus one because when it return then it will add + to intmax and cause overflow so alerady taken care of
+            return INT_MAX-1;
+        }
+        if(matrix[n]!=-1){
+            return matrix[n];
+        }
+
+        int yes=INT_MAX;
+        int no=0;
+        for(int i=0;i<arr.size();i++){
+            
+            yes=min(yes,solve(arr,n-arr[i],matrix)+1);
+
+        }
+        matrix[n]=yes;
+        return matrix[n];
+    
+    }
+
+
+    int numSquares(int n) {
+ 
+        vector<int>arr;
+        for(int i=1;i*i<=n;i++){
+            int temp=i*i;
+            arr.push_back(temp);
+        }
+        vector<int>matrix(n+1,-1);
+        
+        return solve(arr,n,matrix);
+    }
+};

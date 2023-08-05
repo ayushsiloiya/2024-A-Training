@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int trailingZeroes(int n) {
+        //Polignac Formula
+        int num=floor((n)/log10(5));
+        int cc=0;
+        for(long long i=1;i<=num;i++){
+            cc=cc+floor(n/pow(5,i));
+        }
+        return cc;
+        
+    }
+};

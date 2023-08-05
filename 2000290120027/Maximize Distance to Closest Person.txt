@@ -1,0 +1,29 @@
+class Solution:
+    def maxDistToClosest(self, seats: List[int]) -> int:
+        
+        ans=0
+        aa=0
+        bb=0
+        cc=0
+        n=len(seats)
+        
+        for i in range(n):
+            if(seats[i]==0):
+                cc+=1
+            else:
+                ans=max(cc,ans)
+                cc=0
+
+        i=0
+        while(seats[i]!=1):
+            aa+=1
+            i+=1
+
+        i=n-1
+        while(seats[i]!=1):
+            bb+=1
+            i-=1
+            
+        aa=max(aa,bb)
+
+        return max(int((ans+1)/2),aa)

@@ -1,0 +1,56 @@
+class Solution(object):
+    def minSubArrayLen(self, target, nums):
+
+        check=sum(nums)
+        if(check<target):
+            return 0
+            
+        n=len(nums)
+        a=0
+        b=-1
+        cc=n
+        val=0
+        flag=0
+
+        while(a<n and b<n):
+            if(val<target):
+                b+=1
+                if(b==n and b-a==1):
+                    break
+                
+                
+                if(b==n):
+                    b=n-1
+                    flag=1
+
+                val=val+nums[b]
+
+                if(flag==1):
+                    val=val-nums[n-1]
+                    b=n
+                
+            elif(val>target):
+                cc=min(b-a+1,cc)
+                if(b==n and b-a==1):
+                    break
+                val=val-nums[a]
+                a+=1
+            else:
+                cc=min(b-a+1,cc)
+                if(b==n and b-a==1):
+                    break
+                val=val-nums[a]
+                a+=1
+                b=b+1
+
+                if(b==n):
+                    b=n-1
+                    flag=1
+                
+                val=val+nums[b]
+
+                if(flag==1):
+                    val=val-nums[n-1]
+                    b=n
+                
+        return cc

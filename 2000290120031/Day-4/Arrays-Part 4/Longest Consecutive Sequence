@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        
+        set<int>s;
+        for(auto it:nums)
+        {
+            s.insert(it);
+        }
+        int ans=0;
+        for(auto it:s)
+        {
+            if(s.find(it+1)==s.end())
+            {
+               int currNum=it;
+               int currstreak=1;
+               while(s.find(currNum-1)!=s.end())
+               {
+                   currNum-=1;
+                   currstreak+=1;
+               }
+               ans=max(ans,currstreak);
+            }
+        }
+        return ans;
+    }
+};

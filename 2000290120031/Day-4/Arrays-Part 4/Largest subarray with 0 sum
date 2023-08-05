@@ -1,0 +1,23 @@
+class Solution{
+    public:
+    int maxLen(vector<int>&A, int n)
+    {   
+        unordered_map<int,int> umap;
+        int sum = 0;
+        int length = 0;
+        umap.insert({0 , -1});
+        for(int i = 0;i<n;i++)
+        {
+            sum += A[i];
+            if(umap.find(sum) != umap.end())
+            {
+                length = max(length , i - umap[sum]);
+            }
+            else 
+            {
+                umap.insert({sum , i});
+            }
+        }
+        return length;
+    }
+};
